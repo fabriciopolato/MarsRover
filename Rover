@@ -1,0 +1,155 @@
+// Rover Object Goes Here
+// ======================
+let direc = ["N", "W", "S", "E"];
+
+rover = {
+  direction: direc[0],
+  x: 0,
+  y: 0,
+  travelLog: []
+}
+
+// ======================
+function turnLeft(rover) {
+  console.log("turnLeft was called!");
+  
+  switch(rover.direction) {
+    case direc[0]: 
+      rover.direction = direc[1];
+      break;
+    case direc[1]:
+      rover.direction = direc[2];
+      break;
+    case direc[2]:
+      rover.direction = direc[3];
+      break;
+    case direc[3]:
+      rover.direction = direc[0];
+      break;
+  }
+  console.log(rover);
+}
+
+function turnRight(rover) {
+  console.log("turnRight was called!");
+  
+  switch(rover.direction) {
+    case direc[0]: 
+      rover.direction = direc[3];
+      break;
+    case direc[1]:
+      rover.direction = direc[0];
+      break;
+    case direc[2]:
+      rover.direction = direc[1];
+      break;
+    case direc[3]:
+      rover.direction = direc[2];
+      break;
+  }
+  console.log(rover);
+}
+
+function moveForward(rover) {
+  console.log("moveForward was called")
+  
+  switch (rover.direction) {
+    case direc[0]: 
+      if (rover.y > 0 && rover.y <= 9) {
+      rover.y--;
+    } else {
+      console.log(`Out of the table`);
+    }
+      break;
+    case direc[1]:
+      if (rover.x > 0 && rover.x <= 9) {
+      rover.x--;
+    } else {
+      console.log(`Out of the table`);
+    }
+      break;
+    case direc[2]:
+      if (rover.y >= 0 && rover.y < 9) {
+      rover.y++;
+    } else {
+      console.log(`Out of the table`);
+    }
+      break;
+    case direc[3]:
+      if (rover.x >= 0 && rover.x < 9) {
+      rover.x++;
+    } else {
+      console.log(`Out of the table`);
+    }
+      break;  
+    }
+  
+  console.log(`Position is ${rover.x},${rover.y}`);
+}
+
+function moveBackward(rover) {
+  console.log("moveBackward was called")
+  
+  switch (rover.direction) {
+    case direc[0]: 
+      if (rover.y >= 0 && rover.y < 9) {
+      rover.y++;
+    } else {
+      console.log(`Out of the table`);
+    }
+      break;
+    case direc[1]:
+      if (rover.x >= 0 && rover.x < 9) {
+      rover.x++;
+    } else {
+      console.log(`Out of the table`);
+    }
+      break;
+    case direc[2]:
+      if (rover.y > 0 && rover.y <= 9) {
+      rover.y--;
+    } else {
+      console.log(`Out of the table`);
+    }
+      break;
+    case direc[3]:
+      if (rover.x > 0 && rover.x <= 9) {
+      rover.x--;
+    } else {
+      console.log(`Out of the table`);
+    }
+      break;  
+    }
+  
+  console.log(`Position is ${rover.x},${rover.y}`);
+}
+
+let newPosition = {x: rover.x, y: rover.y};
+
+function move(directionArr) {
+  for (let i = 0; i < directionArr.length; i++) {
+   switch(directionArr[i]) {
+    case "l":
+       turnLeft(rover);
+       rover.travelLog.push(newPosition);
+       break;
+    case "r":
+       turnRight(rover);
+       rover.travelLog.push(newPosition);
+       break;
+    case "f":
+       moveForward(rover);
+       rover.travelLog.push(newPosition);
+       break;
+     case "b":
+       moveBackward(rover);
+       rover.travelLog.push(newPosition);
+       break;
+     default:
+       console.log("That's not a valid input")
+       break;
+   } 
+  }
+}
+
+move("rffrfflfrffb");
